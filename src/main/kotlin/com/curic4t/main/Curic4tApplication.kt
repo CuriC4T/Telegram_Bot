@@ -1,6 +1,7 @@
 package com.curic4t.main
 
 import com.curic4t.telegram.TelegramBot
+import com.curic4t.udp.Server
 import org.springframework.boot.SpringApplication
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.context.ApplicationEventPublisher
@@ -15,7 +16,9 @@ fun main(args: Array<String>) {
     ApiContextInitializer.init();
 
     val telegramBot: TelegramBot = TelegramBot(BOT_NAME,TOKEN)
-    telegramBot.settingBot()
+
+    val server:Server = Server(40000,telegramBot)
+
     //runApplication<Curic4tApplication>(*args)
 
     SpringApplication.run(Curic4tApplication::class.java, *args)
