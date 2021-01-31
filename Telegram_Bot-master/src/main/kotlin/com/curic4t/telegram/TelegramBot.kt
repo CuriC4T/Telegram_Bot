@@ -15,5 +15,9 @@ class TelegramBot(val BOT_NAME:String , val TOKEN:String) {
         botsApi.registerBot(telegramBotSetting)
     }
 
+    public fun sendMessage(msg:String){
+        telegramBotSetting.sendMessage(msg)
+    }
+
 
 }

@@ -16,13 +16,13 @@ class TelegramBotSetting(val BOT_NAME: String, val TOKEN: String) : TelegramLong
     //private val TOKEN: String = "888289672:AAFEh_x7jMaxcYhL7lPyz4-Br0Y8r-bVrhY"
     val utilFunction:UtilFunction= UtilFunction()
     val ORDER_LIST: List<String> = listOf("/start","/help","/weather", "/choose")
-
+    var chatId: Long = 0
     override fun getBotUsername(): String = BOT_NAME
 
     override fun getBotToken(): String = TOKEN
 
     override fun onUpdateReceived(update: Update?) {
-        var chatId: Long = 0
+
         var order: String = ""
         update?.run {
             println(update.getMessage().getFrom().getId()); //get ID 는 suer id
@@ -80,6 +80,22 @@ class TelegramBotSetting(val BOT_NAME: String, val TOKEN: String) : TelegramLong
     public fun sendMessage(chatId: Long, message: String) {
         message?.let {
             if(message.compareTo("ERROR")!=0){
+                var sendMessage: SendMessage = SendMessage()
+                        .setChatId(chatId)
+                        .setText(message)
+
+                println(chatId)
+                println(message)
+
+                execute(sendMessage)
+            }
+
+        }
+
+    }
+    public fun sendMessage(message: String) {
+        message?.let {
+            if(message.compareTo("ERROR")!=0 && !chatId.equals(0)){
                 var sendMessage: SendMessage = SendMessage()
                         .setChatId(chatId)
                         .setText(message)

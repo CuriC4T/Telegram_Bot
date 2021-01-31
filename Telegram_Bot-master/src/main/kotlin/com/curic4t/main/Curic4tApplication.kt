@@ -10,14 +10,13 @@ import org.telegram.telegrambots.ApiContextInitializer
 
 @SpringBootApplication
 class Curic4tApplication
-val BOT_NAME: String = "curic4t_bot"
-val TOKEN: String = "888289672:AAFEh_x7jMaxcYhL7lPyz4-Br0Y8r-bVrhY"
+const val BOT_NAME: String = "curic4t_bot"
+const val TOKEN: String = "888289672:AAFEh_x7jMaxcYhL7lPyz4-Br0Y8r-bVrhY"
 fun main(args: Array<String>) {
     ApiContextInitializer.init();
 
-    val telegramBot: TelegramBot = TelegramBot(BOT_NAME,TOKEN)
-
-    val server:Server = Server(40000,telegramBot)
+    val server:Server = Server(25456)
+    server.service()
 
     //runApplication<Curic4tApplication>(*args)
 
