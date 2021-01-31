@@ -23,6 +23,7 @@ class CNotificationListenerService : NotificationListenerService() {
     var hostname :String =""
     var port : Int = 0
     lateinit var udpServer:UDPserver;
+    lateinit var thread:Thread
 
     override fun onNotificationPosted(sbn: StatusBarNotification) {
         super.onNotificationPosted(sbn)
@@ -53,7 +54,10 @@ class CNotificationListenerService : NotificationListenerService() {
                 var message = sbn.packageName +"#"+title
                 Log.d("TESTTEST","send Message : $message")
 
-                udpServer.sendMessage(message)
+                thread =Thread{
+                    udpServer.sendMessage(message)
+                }
+                thread.start()
 
             }
 
@@ -98,6 +102,7 @@ class CNotificationListenerService : NotificationListenerService() {
         var result = 0
         when(msg){
             "com.android.systemui"-> result= 0
+            "org.telegram.messenger" -> result = 1
             else->result = 1
         }
         return result
@@ -112,9 +117,6 @@ class CNotificationListenerService : NotificationListenerService() {
                 when (intent?.getStringExtra("check")){
                     "cancel"->{
                         Log.d("TestTest","꺼짐")
-                        udpServer.sendMessage("com.kakao.talk#TEST")
-                        Log.d("TestTest","테스트 메세지 전송")
-
                         check=false
                     }
                     "ok"->{

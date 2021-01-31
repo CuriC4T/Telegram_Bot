@@ -7,6 +7,7 @@ import android.widget.Switch
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.NotificationManagerCompat
 import com.curic4t.notificationtoserver.R
+import com.curic4t.notificationtoserver.server.UDPserver
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity(){
@@ -30,6 +31,7 @@ class MainActivity : AppCompatActivity(){
                 boardcastIntent.action = packageName
                 boardcastIntent.putExtra("check","ok")
                 sendBroadcast(boardcastIntent)
+
             }else{
                 Log.d("TestTest","체크 끔")
                 boardcastIntent.action = packageName
